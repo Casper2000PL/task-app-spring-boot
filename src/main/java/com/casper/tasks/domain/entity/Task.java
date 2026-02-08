@@ -3,6 +3,7 @@ package com.casper.tasks.domain.entity;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -22,7 +23,7 @@ public class Task {
     private String description;
 
     @Column(name = "due_date")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -41,12 +42,13 @@ public class Task {
     public Task() {
     }
 
-    public Task(TaskStatus status, UUID id, String title, String description, LocalDateTime dueDate, TaskPriority priority, Instant created, Instant updated) {
-        this.status = status;
+    public Task(UUID id, String title, String description, LocalDate dueDate,
+                TaskStatus status, TaskPriority priority, Instant created, Instant updated) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
+        this.status = status;
         this.priority = priority;
         this.created = created;
         this.updated = updated;
@@ -76,11 +78,11 @@ public class Task {
         this.title = title;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
