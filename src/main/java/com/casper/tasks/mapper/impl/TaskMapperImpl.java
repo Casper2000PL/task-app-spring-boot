@@ -1,8 +1,10 @@
 package com.casper.tasks.mapper.impl;
 
 import com.casper.tasks.domain.CreateTaskRequest;
+import com.casper.tasks.domain.UpdateTaskRequest;
 import com.casper.tasks.domain.dto.CreateTaskRequestDto;
 import com.casper.tasks.domain.dto.TaskDto;
+import com.casper.tasks.domain.dto.UpdateTaskRequestDto;
 import com.casper.tasks.domain.entity.Task;
 import com.casper.tasks.mapper.TaskMapper;
 import org.springframework.stereotype.Component;
@@ -28,6 +30,17 @@ public class TaskMapperImpl implements TaskMapper {
 			task.getDueDate(),
 			task.getPriority(),
 			task.getStatus()
+	);
+  }
+
+  @Override
+  public UpdateTaskRequest fromDto(UpdateTaskRequestDto dto) {
+	return new UpdateTaskRequest(
+			dto.title(),
+			dto.description(),
+			dto.dueDate(),
+			dto.status(),
+			dto.priority()
 	);
   }
 }
