@@ -5,9 +5,12 @@ import com.casper.tasks.domain.entity.Task;
 import com.casper.tasks.domain.entity.TaskStatus;
 import com.casper.tasks.repository.TaskRepository;
 import com.casper.tasks.service.TaskService;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -34,5 +37,10 @@ public class TaskServiceImpl implements TaskService {
         );
 
         return taskRepository.save(task);
+    }
+
+    @Override
+    public List<Task> listTasks() {
+        return taskRepository.findAll(Sort.by(Direction.ASC, "created"));
     }
 }
